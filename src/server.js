@@ -25,5 +25,15 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });// not neccessary
 // 이렇게하면 http, websocket server 둘다 돌릴 수 있다
 // 함께 http, ws 를 만들지 않아도 된다.
+
+// 소켓을 통해 클라이언트와 연결, 메시지 송수신한것은 어딘가에 저장해야한다.
+// 여기서의 socket은 연결된 브라우저를 뜻한다.
+function handlerConnection(socket) {
+    console.log(socket);
+}
+
+wss.on("connection", handlerConnection)
 server.listen(3000, handleListen);
+
+
 // 서버는 http, ws 두가지 프로토콜을 이해할 수 있게 되었다.
