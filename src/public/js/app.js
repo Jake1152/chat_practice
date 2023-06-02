@@ -18,3 +18,21 @@
 // # 4 ws protocol with DOM
 const socket = new WebSocket(`ws://${window.location.host}`);
 // backend와 메시지를 송수신할 수 있게 된다
+
+socket.addEventListener("open", () => {
+    console.log("Coonected from Server 💚");
+});
+
+
+
+socket.addEventListener("message", (message) => {
+    console.log("New message", message.data);
+});
+
+socket.addEventListener("close", () =>{
+    console.log("Disconnected from Server 🧡"); 
+});
+
+setTimeout(() => {
+    socket.send("hello from the browser");
+}, 1000);
