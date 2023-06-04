@@ -16,7 +16,12 @@ const wsServer = SocketIO(httpServer);
 const handleListen = () => console.log('Listening on http://location:3000');
 httpServer.listen(3000, handleListen);
 
-wsServer.on("connection", (socket) => {
-    // console.log(socket);
+wsServer.on("connection", (socket) => { 
+        socket.on("enter_roon", (msg, done) => { 
+            console.log(msg)
+            setTimeout(() => {
+                done();
+            }, 10000);
+    });
 });
 
