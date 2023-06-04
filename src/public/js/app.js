@@ -1,15 +1,20 @@
 const socket = io();
-const welcome = document.getElementById("welcome")
+const welcome = document.getElementById("welcome");
 const form = welcome.querySelector("form");
+const room = document.getElementById("room");
+
+room.hidden = true;
+
+function showRoom() {
+    welcome.hidden = true;
+    room.hidden = false;
+}
 
 function handleRoomSubmit(event) {
     event.preventDefault();
     const input = form.querySelector("Input");
-    // socket.io로 만든 것으로 원하는 이벤트를 만들 수 있다.
-    // 또한 함수도 넘겨줄수 있다.
-    socket.emit("enter_room", { payload: input.value}, () => {
-        console.log("server is done!");
-    });
+    // socket.emit("enter_room", input.value, showRoom);
+    socket.emit("enter_room", 5,  "hi", 42, true, false);
     input.value =""
 }
 
