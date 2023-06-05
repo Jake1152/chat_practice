@@ -14,18 +14,16 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => { 
-    socket.on("enter_room", (a, b, c, d, e, f) => { 
-        console.log(a, b, c, d, e, f);
+    socket.on("enter_room", (roomName, done) => { 
+        done();
+        console.log(roomName);
+        console.log(socket.id);
+        console.log(socket.rooms);
+        socket.join(roomName);
+        console.log(socket.rooms);
     });
-    // socket.on("enter_room", (roomName, done) => { 
-    //     done();
-    //     console.log(roomName);
-    //     console.log(socket.id);
-    //     console.log(socket.rooms);
-    //     socket.join(roomName);
-    //     console.log(socket.rooms);
-    // });
 });
+
 
 const handleListen = () => console.log('Listening on http://location:3000');
 httpServer.listen(3000, handleListen);
